@@ -32,9 +32,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    item_params = params.dup
+    item_params = params.slice *fields.keys
     item_params.delete_if { |k, v| !@resource.columns.map(&:name).include?(k) }
-    @item = @resource.new(item_params)
+    @item = @resource.new(item_params, :without_protection => true)
 
     respond_to do |format|
       format.html # new.html.erb
