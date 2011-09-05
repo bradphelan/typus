@@ -4,6 +4,15 @@ module Admin::Resources::DisplayHelper
     "&mdash;".html_safe
   end
 
+  def table_virtual_field(attribute, item)
+    item.send(attribute).to_s
+  end
+
+  def display_virtual(item, attribute)
+    item.send(attribute).to_s
+  end
+
+
   def build_display(item, fields)
     fields.map do |attribute, type|
       condition = (type == :boolean) || item.send(attribute).present?
